@@ -7,7 +7,7 @@
 ¡Bienvenido al taller de desarrollo en **Monad**! Este repositorio está diseñado para que personas que nunca han interactuado con la blockchain puedan aprender desde lo más básico hasta crear una aplicación funcional (dApp) con operaciones completas.
 
 
-Este evento es organizado por [**Medellín Block**](https://x.com/MedellinBlock) y el taller ha sido elaborado con mucho ❤️ por [**DevLabX3**](https://x.com/devlabx3).
+Este evento es organizado por [**Medellín Blockchain**](https://x.com/MedellinBlock) y el taller ha sido elaborado con mucho ❤️ por [**DevLabX3**](https://x.com/devlabx3).
 
 ## 📋 Tabla de Contenidos
 1. [Prerrequisitos](#-prerrequisitos)
