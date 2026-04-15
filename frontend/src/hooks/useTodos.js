@@ -19,9 +19,11 @@ export function useTodos() {
     address: CONTRACT_ADDRESS,
     abi: TODO_LIST_ABI,
     functionName: "getTodos",
+    account: address, // ← sets msg.sender = connected wallet in eth_call
     query: {
-      enabled: isConnected && !!CONTRACT_ADDRESS,
-      refetchInterval: 4000, // Refetch every 4 seconds
+      enabled: isConnected && !!CONTRACT_ADDRESS && !!address,
+      refetchInterval: 4000,       // Poll every 4 seconds
+      refetchOnWindowFocus: true,  // Immediate refetch when returning from MetaMask
     },
   });
 }
