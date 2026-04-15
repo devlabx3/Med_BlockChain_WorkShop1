@@ -13,13 +13,20 @@ import "./TodoList.css";
  * - Rendering lists
  */
 function TodoList() {
-  const { data: todos = [], isLoading } = useTodos();
+  const { data: todos = [], isLoading, error } = useTodos();
+
+  // Debug: log raw data from contract
+  console.log('[TodoList] raw data:', todos, '| isLoading:', isLoading, '| error:', error);
 
   // Filter out deleted todos (soft delete)
   const activeTodos = todos.filter((todo) => todo.exists);
 
   if (isLoading) {
     return <div className="loading">Loading tasks...</div>;
+  }
+
+  if (error) {
+    return <div className="empty-list" style={{color:'red'}}>Error: {error.message}</div>;
   }
 
   if (activeTodos.length === 0) {

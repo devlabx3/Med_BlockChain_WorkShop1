@@ -16,7 +16,9 @@ export const monadTestnet = defineChain({
   },
   rpcUrls: {
     default: {
-      http: ["https://testnet.monad.xyz/"],
+      // In dev: use Vite proxy (/rpc) to avoid CORS from localhost
+      // In prod: use the real RPC directly (CORS not an issue from deployed origin)
+      http: [import.meta.env.DEV ? "/rpc" : "https://testnet.monad.xyz/"],
     },
   },
   blockExplorers: {
