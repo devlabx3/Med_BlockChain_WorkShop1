@@ -11,7 +11,7 @@ export default defineConfig({
       '/rpc': {
         target: 'https://testnet.monad.xyz',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/rpc/, ''),
+        rewrite: () => '/',  // always forward to root /
       },
     },
   },
