@@ -2,136 +2,90 @@
 pragma solidity ^0.8.24;
 
 /**
- * @title TodoList
- * @notice A multi-user todo list where each wallet has its own list.
- *         Designed for beginners — optimized for clarity, not gas.
+ * @title TodoList (Lista de Tareas)
+ * @notice Cada wallet tiene su propia lista de tareas en la blockchain.
  *
- * Key Concepts:
- * - msg.sender: always the wallet that called the function
- * - mapping: dictionary/map to store data (key → value)
- * - struct: custom data type grouping multiple fields
- * - events: broadcast data to the outside world (frontend listens)
+ * Conceptos clave:
+ * - msg.sender: la dirección (wallet) de quien llama la función
+ * - mapping: como un diccionario → wallet => lista de tareas
+ * - struct: un tipo de dato con varios campos agrupados
+ * - events: notificaciones que el frontend puede escuchar
  */
 contract TodoList {
 
-    // ─── Data Types ───────────────────────────────────────────────────────────
-
+    // Estructura de una tarea
     struct Todo {
-        uint256 id;          // index in the user's array
-        string  text;        // the task text
-        bool    completed;   // done or not
-        bool    exists;      // false = was deleted (soft delete)
+        uint256 id;        // Identificador único
+        string  text;      // Descripción de la tarea
+        bool    completed; // true = completada, false = pendiente
     }
 
-    // ─── Storage ──────────────────────────────────────────────────────────────
-
-    // wallet address → list of todos
-    // Each user only sees their own todos because of msg.sender
+    // Cada wallet tiene su propio array de tareas
     mapping(address => Todo[]) private _todos;
 
-    // ─── Events ───────────────────────────────────────────────────────────────
-
+    // Eventos: el frontend los escucha para actualizar la UI
     event TodoAdded(address indexed owner, uint256 indexed id, string text);
     event TodoToggled(address indexed owner, uint256 indexed id, bool completed);
     event TodoUpdated(address indexed owner, uint256 indexed id, string newText);
     event TodoDeleted(address indexed owner, uint256 indexed id);
 
-    // ─── Modifiers ────────────────────────────────────────────────────────────
+    // ── CREATE ──────────────────────────────────────────────────────────────
 
-    /// @notice Reusable guard: check that a todo exists and hasn't been deleted
-    modifier todoExists(uint256 id) {
-        require(id < _todos[msg.sender].length, "Todo: index out of range");
-        require(_todos[msg.sender][id].exists, "Todo: already deleted");
-        _;
-    }
-
-    // ─── Write Functions ─────────────────────────────────────────────────────
-
-    /// @notice Create a new todo
-    /// @param text The task text (cannot be empty)
+    /// @notice Crea una nueva tarea
     function addTodo(string calldata text) external {
-        require(bytes(text).length > 0, "Todo: text cannot be empty");
+        require(bytes(text).length > 0, "El texto no puede estar vacio");
 
         uint256 newId = _todos[msg.sender].length;
+
         _todos[msg.sender].push(Todo({
             id:        newId,
             text:      text,
-            completed: false,
-            exists:    true
+            completed: false
         }));
 
         emit TodoAdded(msg.sender, newId, text);
     }
 
-    /// @notice Toggle the completed status of a todo (true → false or false → true)
-    /// @param id The todo index
-    function toggleTodo(uint256 id) external todoExists(id) {
-        Todo storage todo = _todos[msg.sender][id];
-        todo.completed = !todo.completed;
-        emit TodoToggled(msg.sender, id, todo.completed);
-    }
+    // ── READ ────────────────────────────────────────────────────────────────
 
-    /// @notice Edit the text of an existing todo
-    /// @param id The todo index
-    /// @param newText The new task text (cannot be empty)
-    function updateTodo(uint256 id, string calldata newText) external todoExists(id) {
-        require(bytes(newText).length > 0, "Todo: text cannot be empty");
-        _todos[msg.sender][id].text = newText;
-        emit TodoUpdated(msg.sender, id, newText);
-    }
-
-    /// @notice Soft-delete a todo (marks exists=false, index stays the same)
-    /// @dev Frontend should filter out todos where exists == false
-    /// @param id The todo index
-    function deleteTodo(uint256 id) external todoExists(id) {
-        _todos[msg.sender][id].exists = false;
-        emit TodoDeleted(msg.sender, id);
-    }
-
-    // ─── Read Functions ───────────────────────────────────────────────────────
-
-    /// @notice Returns all todos for the caller (including soft-deleted ones)
-    /// @dev Frontend should filter out todos where exists == false
-    /// @return Array of all todos for msg.sender
+    /// @notice Devuelve todas las tareas del usuario
+    /// @dev Las tareas eliminadas tendrán id=0, text="" y completed=false
     function getTodos() external view returns (Todo[] memory) {
         return _todos[msg.sender];
     }
 
-    /// @notice Returns a single todo by index
-    /// @param id The todo index
-    /// @return The todo struct
-    function getTodo(uint256 id) external view todoExists(id) returns (Todo memory) {
-        return _todos[msg.sender][id];
+    // ── UPDATE ──────────────────────────────────────────────────────────────
+
+    /// @notice Cambia el estado: completada ↔ pendiente
+    function toggleTodo(uint256 id) external {
+        require(id < _todos[msg.sender].length, "Tarea no encontrada");
+
+        Todo storage todo = _todos[msg.sender][id];
+        todo.completed = !todo.completed;
+
+        emit TodoToggled(msg.sender, id, todo.completed);
     }
 
-    /// @notice Returns how many todos the caller has (including deleted)
-    /// @return Total number of todos (array length)
-    function getTodoCount() external view returns (uint256) {
-        return _todos[msg.sender].length;
+    /// @notice Edita el texto de una tarea
+    function updateTodo(uint256 id, string calldata newText) external {
+        require(id < _todos[msg.sender].length, "Tarea no encontrada");
+        require(bytes(newText).length > 0, "El texto no puede estar vacio");
+
+        _todos[msg.sender][id].text = newText;
+
+        emit TodoUpdated(msg.sender, id, newText);
     }
 
-    // ─── Utilities ────────────────────────────────────────────────────────────
+    // ── DELETE ───────────────────────────────────────────────────────────────
 
-    /// @notice Get all active todos for the caller (filters out deleted ones)
-    /// @return Array of only non-deleted todos
-    function getActiveTodos() external view returns (Todo[] memory) {
-        // Count active todos first
-        uint256 activeCount = 0;
-        for (uint256 i = 0; i < _todos[msg.sender].length; i++) {
-            if (_todos[msg.sender][i].exists) {
-                activeCount++;
-            }
-        }
+    /// @notice Elimina una tarea (pone sus valores en cero)
+    /// @dev Usa `delete` de Solidity que resetea el slot a valores por defecto.
+    ///      El frontend debe filtrar tareas donde text == "" para no mostrarlas.
+    function deleteTodo(uint256 id) external {
+        require(id < _todos[msg.sender].length, "Tarea no encontrada");
 
-        // Create result array and fill it
-        Todo[] memory active = new Todo[](activeCount);
-        uint256 index = 0;
-        for (uint256 i = 0; i < _todos[msg.sender].length; i++) {
-            if (_todos[msg.sender][i].exists) {
-                active[index] = _todos[msg.sender][i];
-                index++;
-            }
-        }
-        return active;
+        delete _todos[msg.sender][id];
+
+        emit TodoDeleted(msg.sender, id);
     }
 }

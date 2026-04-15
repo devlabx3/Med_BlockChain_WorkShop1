@@ -1,269 +1,99 @@
-# TodoList DApp — BlockChain Workshop
+<p align="center">
+  <img src="Monad.png" alt="Monad Header" width="100%">
+</p>
 
-Un proyecto educativo completo para aprender blockchain desde cero: un contrato inteligente multi-usuario en Solidity y una interfaz web moderna con Vite + React + RainbowKit.
+# 🚀 Taller de Desarrollo en Monad Blitz
 
-**Público objetivo:** Principiantes 100% sin conocimiento de programación ni contratos inteligentes.
+¡Bienvenido al taller de desarrollo en **Monad**! Este repositorio está diseñado para que personas que nunca han interactuado con la blockchain puedan aprender desde lo más básico hasta crear una aplicación funcional (dApp) con operaciones completas.
 
----
 
-## 🎯 Objetivos del Workshop
+Este evento es organizado por [**Medellín Block**](https://x.com/MedellinBlock) y el taller ha sido elaborado con mucho ❤️ por [**DevLabX3**](https://x.com/devlabx3).
 
-1. Entender cómo funciona un **mapping en Solidity** (estructura datos)
-2. Escribir un **contrato inteligente simple** con CRUD
-3. Desplegar a **Monad Testnet** usando Remix IDE (sin CLI)
-4. Conectar una **interfaz web** a un contrato via Web3
-5. Aprender la diferencia entre **write** (transacciones) y **read** (vistas)
-
----
-
-## 📋 Requisitos Previos
-
-- **MetaMask** instalado (extension de Chrome/Firefox)
-- **MON tokens** en MetaMask (gratis desde faucet.monad.xyz)
-- **Node.js 18+** (`npm --version` para verificar)
-- Un editor de texto (VS Code recomendado)
-- **Remix IDE**: accedes desde el navegador en remix.ethereum.org
+## 📋 Tabla de Contenidos
+1. [Prerrequisitos](#-prerrequisitos)
+2. [Despliegue de Contratos (Remix)](#-despliegue-de-contratos-remix)
+3. [Configuración del Proyecto](#-configuración-del-proyecto)
+4. [Ruta de Aprendizaje (Casos de Uso)](#-ruta-de-aprendizaje-casos-de-uso)
+5. [Cómo Ejecutar](#-cómo-ejecutar)
 
 ---
 
-## 🚀 Estructura del Proyecto
+## 🛠️ Prerrequisitos
 
-```
-Med_BlockChain_WorkShop1/
-├── contract/
-│   └── TodoList.sol          ← Contrato que se despliega en Remix
-└── frontend/
-    ├── src/
-    │   ├── App.jsx
-    │   ├── components/        ← Botones, formularios, listas
-    │   ├── hooks/            ← Conexión con blockchain
-    │   └── config/           ← RainbowKit, ABI, chains
-    └── package.json
-```
+Antes de empezar, asegúrate de tener lo siguiente:
+
+1.  **Wallet de Web3:** Descarga e instala [MetaMask](https://metamask.io/) o [Rabby Wallet](https://rabby.io/).
+2.  **Red Monad Testnet:** Agregue la red a su wallet si aún no la tiene.
+3.  **Fondos de Prueba (Faucet):** Obtén tokens MON gratuitos para pagar las transacciones en:
+    *   👉 [Monad Testnet Faucet](https://faucet.trade/monad-testnet-mon-faucet)
+4.  **Entorno Local:** Tener instalado [Node.js](https://nodejs.org/) (versión 18 o superior).
 
 ---
 
-## 📖 Guía Paso a Paso
+## 📜 Despliegue de Contratos (Remix)
 
-### Fase 1: El Contrato Inteligente (20 min)
+Vamos a subir nuestros contratos inteligentes a la red de Monad usando **Remix IDE**.
 
-1. **Abrir Remix IDE**
-   ```
-   https://remix.ethereum.org
-   ```
+1. Abre [Remix IDE](https://remix.ethereum.org/).
+2. Crea dos archivos nuevos en la carpeta `contracts`: `Storage.sol` y `TodoList.sol`.
+3. Copia el código de los archivos correspondientes de la carpeta `contract/` de este repositorio.
+4. **Compilar:** Ve a la pestaña "Solidity Compiler" y haz clic en "Compile".
+5. **Desplegar:**
+   * Ve a "Deploy & Run Transactions".
+   * En el campo "Environment", selecciona **Injected Provider - MetaMask**.
+   * Asegúrate de que tu wallet esté en la red **Monad Testnet**.
+   * Haz clic en "Deploy".
+6. **Guardar Direcciones:** Una vez desplegados, copia las direcciones de los contratos (Contract Address). Las necesitarás para el archivo `.env`.
 
-2. **Crear nuevo archivo**
-   - Panel izquierdo → "+" → nuevo archivo
-   - Nombre: `TodoList.sol`
-   - Copiar todo el contenido de `contract/TodoList.sol`
+---
 
-3. **Compilar**
-   - Panel izquierdo → "Solidity Compiler"
-   - Seleccionar versión: `0.8.24`
-   - Click en "Compile TodoList.sol"
-   - Verifica que no haya errores (⚠️ warnings están OK)
+## ⚙️ Configuración del Proyecto
 
-4. **Desplegar en Monad Testnet**
-   - Asegúrate de tener MON en MetaMask (testnet)
-   - Panel izquierdo → "Deploy & Run Transactions"
-   - Environment: "Injected Provider - MetaMask"
-   - Network en MetaMask: **Monad Testnet** (chainId 10143)
-   - Click en "Deploy"
-   - Confirma la transacción en MetaMask
+1. Crea una cuenta en [Reown (anteriormente WalletConnect)](https://cloud.reown.com/) y obtén un `Project ID`.
+2. En la raíz del proyecto, verás un archivo llamado `.env.example`.
+3. **Copia** su contenido y crea un nuevo archivo llamado `.env` en cada una de las carpetas de los casos:
+   * `frontend/caso1/.env`
+   * `frontend/caso2/.env`
+   * `frontend/caso3/.env`
+4. Llena los campos con tu `VITE_WALLETCONNECT_PROJECT_ID` y las direcciones de los contratos que desplegaste.
 
-5. **Copiar dirección y ABI**
-   - Después del deploy, verás la dirección del contrato (comienza con `0x`)
-   - **Copia esa dirección** → la necesitarás en `frontend/.env`
-   - Click en "Compilation Details" → copia el **ABI** completo
-   - **Copia el ABI** → lo necesitarás en `frontend/src/config/abi.js`
+---
 
-### Fase 2: Setup del Frontend (15 min)
+## 🗺️ Ruta de Aprendizaje (Casos de Uso)
 
-1. **Scaffold con Vite**
-   ```bash
-   npm create vite@latest frontend -- --template react
-   cd frontend
-   npm install
-   ```
+El frontend está dividido en 3 niveles progresivos:
 
-2. **Instalar librerías Web3**
-   ```bash
-   npm install @rainbow-me/rainbowkit wagmi viem @tanstack/react-query
-   ```
+### 🔹 Caso 1: Conexión de Wallet
+Aprende lo más básico: cómo permitir que un usuario conecte su wallet de MetaMask a tu sitio web usando **RainbowKit** y **Wagmi**.
+*   **Ubicación:** `frontend/caso1`
 
-3. **Crear archivo `.env`**
-   ```bash
-   # frontend/.env
-   VITE_CONTRACT_ADDRESS=0x...          # ← la dirección de Remix
-   VITE_WALLETCONNECT_PROJECT_ID=...    # ← obtén gratis en cloud.walletconnect.com
-   ```
+### 🔹 Caso 2: Lectura y Escritura Simple
+Interactuamos con el contrato `Storage.sol`. Aprenderás a leer un número de la blockchain y a guardar uno nuevo enviando una transacción.
+*   **Ubicación:** `frontend/caso2`
 
-### Fase 3: Configuración de Web3 (10 min)
+### 🔹 Caso 3: CRUD Completo (TodoList)
+El nivel final. Interactuamos con `TodoList.sol` para crear, leer, editar y eliminar tareas. Cada wallet tiene su propia lista privada en la blockchain.
+*   **Ubicación:** `frontend/caso3`
 
-Crea estos archivos en `frontend/src/config/`:
+---
 
-**chains.js** — Define la red Monad
+## 🚀 Cómo Ejecutar
 
-**wagmi.js** — Configura RainbowKit y wagmi
-
-**abi.js** — El ABI del contrato (pega el que copiaste de Remix)
-
-### Fase 4: Los Componentes (45 min)
-
-Crea componentes en `frontend/src/components/`:
-
-- **ConnectButton.jsx** — Botón de conexión de wallet
-- **NetworkBadge.jsx** — Muestra qué red estás conectado
-- **TodoForm.jsx** — Formulario para agregar tareas
-- **TodoList.jsx** — Lista de tareas
-- **TodoItem.jsx** — Cada tarea (checkbox, editar, eliminar)
-
-### Fase 5: Los Hooks (30 min)
-
-Crea hooks en `frontend/src/hooks/` que conectan los componentes con el contrato:
-
-- **useTodos.js** — Lee todas las tareas (getTodos)
-- **useAddTodo.js** — Agrega una tarea (write)
-- **useToggleTodo.js** — Marca completa/incompleta
-- **useUpdateTodo.js** — Edita el texto
-- **useDeleteTodo.js** — Elimina una tarea
-
-### Fase 6: Probar en el Browser
+Para cualquiera de los casos (reemplazar `casoX` por 1, 2 o 3):
 
 ```bash
-cd frontend
+# Entrar a la carpeta del caso
+cd frontend/casoX
+
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
 npm run dev
 ```
 
-Abre http://localhost:5173 — deberías ver:
-1. Un botón "Connect Wallet"
-2. Al conectar, un formulario para agregar tareas
-3. Cada tarea aparece en la lista
+Luego, abre [http://localhost:5173](http://localhost:5173) en tu navegador.
 
 ---
 
-## ⚠️ Troubleshooting
-
-### "Contract not found" o dirección inválida
-- Verifica que `VITE_CONTRACT_ADDRESS` en `.env` sea exacta
-- Debe comenzar con `0x` y tener 42 caracteres
-
-### "Wrong network"
-- NetworkBadge debe decir "Monad Testnet"
-- En MetaMask: verifica que hayas agregado Monad Testnet correctamente
-  - RPC: `https://testnet.monad.xyz/`
-  - chainId: `10143`
-
-### "Sin MON para gas"
-- Faucet: https://faucet.monad.xyz/
-- Espera ~30 segundos después de solicitar
-
-### ABI error / "function not found"
-- Recompila el contrato en Remix
-- Re-copia el ABI completo desde "Compilation Details"
-- Reemplaza completamente el contenido de `src/config/abi.js`
-
-### RainbowKit error sobre projectId
-- Obtén uno gratis: https://cloud.walletconnect.com/
-- Agrega a `frontend/.env`: `VITE_WALLETCONNECT_PROJECT_ID=tu_id_aqui`
-
----
-
-## 🏗️ Cómo Funciona (Arquitectura)
-
-```
-┌─────────────────┐
-│   MetaMask      │  ← Billetera (guarda claves privadas)
-└────────┬────────┘
-         │ firma transacciones
-         ▼
-┌─────────────────────────────────────────┐
-│  Frontend (Vite + React)                │
-│  ┌─────────────────────────────────────┐│
-│  │  RainbowKit → Conexión bonita       ││
-│  │  wagmi → Hooks para leer/escribir   ││
-│  │  viem → Cliente Ethereum            ││
-│  └─────────────────────────────────────┘│
-└────────┬────────────────────────────────┘
-         │ JSON-RPC (web3 calls)
-         ▼
-┌──────────────────────────┐
-│  Monad Testnet (RPC)     │
-│  └─ TodoList.sol         │  ← Tu contrato
-└──────────────────────────┘
-```
-
----
-
-## 📚 Conceptos Clave
-
-### `msg.sender`
-En Solidity, `msg.sender` **siempre** es la dirección que envió la transacción. En una DApp web3, eso es la wallet conectada en MetaMask.
-
-```solidity
-// cada usuario ve solo sus propios todos
-mapping(address => Todo[]) private _todos;
-
-function getTodos() external view returns (Todo[] memory) {
-    return _todos[msg.sender];  // ← automáticamente su wallet
-}
-```
-
-### Write vs Read
-
-- **Write** (transacciones)
-  - Cambian estado del blockchain
-  - Cuestan GAS (MON)
-  - Necesitan confirmación
-  - Ej: `addTodo()`, `deleteTodo()`
-
-- **Read** (vistas)
-  - Solo consultan, no cambian
-  - Gratis (sin gas)
-  - Inmediato
-  - Ej: `getTodos()`
-
-### Events
-El contrato emite eventos para que el frontend sepa qué ocurrió:
-
-```solidity
-event TodoAdded(address indexed owner, uint256 id, string text);
-emit TodoAdded(msg.sender, newId, text);
-```
-
-El frontend puede escuchar estos eventos o simplemente **refetch** los datos.
-
----
-
-## 🎓 Qué Aprendiste
-
-✅ Solidity básico (structs, mappings, modifiers)
-✅ Desplegar en una testnet
-✅ Conectar MetaMask a una web
-✅ Leer/escribir datos en blockchain
-✅ Que un DApp es solo HTML + JS + Web3
-
----
-
-## 🚢 Próximos Pasos (fuera del scope del workshop)
-
-- Agregar persistencia local (localStorage) para UX offline
-- Tests en Solidity (Hardhat, Foundry)
-- Deploy en mainnet (con tu propio dinero)
-- Agregar permisos (solo el propietario puede ver X)
-- Tokenizar (ERC-20, NFTs)
-
----
-
-## 📖 Enlaces Útiles
-
-- [Remix IDE](https://remix.ethereum.org)
-- [Monad Docs](https://docs.monad.xyz/)
-- [Faucet Monad](https://faucet.monad.xyz/)
-- [RainbowKit Docs](https://www.rainbowkit.com/)
-- [Wagmi Docs](https://wagmi.sh/)
-- [Solidity by Example](https://solidity-by-example.org/)
-
----
-
-**Creado para:** Hackathon BlockChain Workshop | **Nivel:** Principiantes | **Tiempo total:** ~2 horas
+¡Disfruta construyendo en Monad! 💜
