@@ -4,7 +4,7 @@ import "./Leaderboard.css";
 export default function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState([]);
 
-  useEffect(() => {
+  const loadLeaderboard = () => {
     // Load from localStorage (in a real app, this would come from a backend/subgraph)
     const stored = localStorage.getItem("culebrita-leaderboard");
     if (stored) {
@@ -16,6 +16,14 @@ export default function Leaderboard() {
         console.error("Error loading leaderboard:", e);
       }
     }
+  };
+
+  useEffect(() => {
+    loadLeaderboard();
+
+    // Listen for leaderboard updates
+    window.addEventListener("leaderboard-updated", loadLeaderboard);
+    return () => window.removeEventListener("leaderboard-updated", loadLeaderboard);
   }, []);
 
   return (

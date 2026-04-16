@@ -102,9 +102,23 @@ export default function App() {
 
         const head = prevSnake[0];
         const newHead = {
-          x: (head.x + newDirection.x + GRID_WIDTH) % GRID_WIDTH,
-          y: (head.y + newDirection.y + GRID_HEIGHT) % GRID_HEIGHT,
+          x: head.x + newDirection.x,
+          y: head.y + newDirection.y,
         };
+
+        // Check wall collision
+        if (
+          newHead.x < 0 ||
+          newHead.x >= GRID_WIDTH ||
+          newHead.y < 0 ||
+          newHead.y >= GRID_HEIGHT
+        ) {
+          setGameState("gameOver");
+          if (audioRef.current) {
+            audioRef.current.pause();
+          }
+          return prevSnake;
+        }
 
         // Check self collision
         if (prevSnake.some((segment) => segment.x === newHead.x && segment.y === newHead.y)) {

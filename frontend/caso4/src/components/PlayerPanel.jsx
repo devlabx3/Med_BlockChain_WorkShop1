@@ -42,17 +42,44 @@ export default function PlayerPanel({ address, score }) {
 
   // Refetch after registration
   useEffect(() => {
-    if (isRegisterSuccess) {
+    if (isRegisterSuccess && playerData) {
       refetchPlayer();
+      // Save to localStorage
+      const leaderboard = JSON.parse(localStorage.getItem("culebrita-leaderboard") || "[]");
+      const newEntry = {
+        address,
+        name: playerData[0],
+        score: Number(playerData[1]),
+        timestamp: Date.now(),
+      };
+      leaderboard.push(newEntry);
+      localStorage.setItem("culebrita-leaderboard", JSON.stringify(leaderboard));
+      window.dispatchEvent(new Event("leaderboard-updated"));
     }
-  }, [isRegisterSuccess, refetchPlayer]);
+  }, [isRegisterSuccess, playerData, address]);
 
   // Refetch after score update
   useEffect(() => {
-    if (isUpdateSuccess) {
+    if (isUpdateSuccess && playerData) {
       refetchPlayer();
+      // Update localStorage
+      const leaderboard = JSON.parse(localStorage.getItem("culebrita-leaderboard") || "[]");
+      const existingIndex = leaderboard.findIndex((p) => p.address === address);
+      const newEntry = {
+        address,
+        name: playerData[0],
+        score: Number(playerData[1]),
+        timestamp: Date.now(),
+      };
+      if (existingIndex >= 0) {
+        leaderboard[existingIndex] = newEntry;
+      } else {
+        leaderboard.push(newEntry);
+      }
+      localStorage.setItem("culebrita-leaderboard", JSON.stringify(leaderboard));
+      window.dispatchEvent(new Event("leaderboard-updated"));
     }
-  }, [isUpdateSuccess, refetchPlayer]);
+  }, [isUpdateSuccess, playerData, address]);
 
   const handleRegister = (e) => {
     e.preventDefault();
