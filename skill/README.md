@@ -92,6 +92,18 @@ Qwen Code es un fork de Gemini CLI y usa `QWEN.md` en la raíz del proyecto como
 
 ---
 
+### OpenCode
+
+```bash
+cp skill/editors/opencode/rainbowkit-evm.md ./AGENTS.md
+```
+
+OpenCode usa `AGENTS.md` en la raíz del proyecto para contexto persistente. El archivo ayuda a OpenCode a entender la estructura del proyecto y los patrones de código, y debe ser commiteado a Git.
+
+> Fuente: [https://opencode.ai/](https://opencode.ai/)
+
+---
+
 ## Estructura de archivos
 
 ```
@@ -111,7 +123,8 @@ skill/
     ├── cursor/rainbowkit-evm.mdc
     ├── windsurf/rainbowkit-evm.md
     ├── antigravity/rainbowkit-evm.md
-    └── qwen/rainbowkit-evm.md
+    ├── qwen/rainbowkit-evm.md
+    └── opencode/rainbowkit-evm.md
 ```
 
 ## Usar los templates
