@@ -1,0 +1,97 @@
+:root {
+  --primary-glow: #00ff88;
+  --secondary-glow: #0099ff;
+  --accent-pink: #ff0088;
+  --accent-orange: #ffaa00;
+  --dark-bg: #000814;
+  --card-bg: rgba(0, 50, 100, 0.9);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Courier New", monospace;
+  background-color: var(--dark-bg);
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Global font smoothing */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection styling */
+::selection {
+  background: var(--primary-glow);
+  color: #000;
+}
+
+::-moz-selection {
+  background: var(--primary-glow);
+  color: #000;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary-glow);
+  outline-offset: 2px;
+}
+
+/* Input styling */
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+/* Animations */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Utility classes */
+.glow-text {
+  text-shadow:
+    0 0 10px var(--primary-glow),
+    0 0 20px var(--secondary-glow);
+}
+
+.glow-border {
+  border: 2px solid var(--primary-glow);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+}

@@ -1,0 +1,90 @@
+.leaderboard {
+  background: linear-gradient(135deg, rgba(0, 50, 100, 0.9), rgba(20, 10, 60, 0.95));
+  border: 2px solid #0099ff;
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 280px;
+  box-shadow:
+    0 0 15px rgba(0, 153, 255, 0.4),
+    0 0 30px rgba(100, 200, 255, 0.2);
+}
+
+.leaderboard-header {
+  margin-bottom: 15px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(0, 153, 255, 0.3);
+}
+
+.leaderboard-header h3 {
+  margin: 0;
+  color: #0099ff;
+  font-size: 18px;
+  text-shadow: 0 0 10px rgba(0, 153, 255, 0.6);
+}
+
+.empty-message {
+  text-align: center;
+  color: rgba(0, 153, 255, 0.6);
+  font-size: 12px;
+  padding: 20px 10px;
+  margin: 0;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard-row {
+  display: table-row;
+  height: 32px;
+  border-bottom: 1px solid rgba(0, 153, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.leaderboard-row:hover {
+  background: rgba(0, 153, 255, 0.1);
+  box-shadow: inset 0 0 10px rgba(0, 153, 255, 0.2);
+}
+
+.leaderboard-row td {
+  padding: 8px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.leaderboard-row .rank {
+  color: #ffaa00;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(255, 170, 0, 0.6);
+  min-width: 30px;
+}
+
+.leaderboard-row .name {
+  color: #00ff88;
+  font-weight: bold;
+  flex: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100px;
+}
+
+.leaderboard-row .score {
+  color: #ff0088;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(255, 0, 136, 0.6);
+  min-width: 40px;
+}
+
+.leaderboard-row:nth-child(1) {
+  background: rgba(255, 170, 0, 0.1);
+}
+
+.leaderboard-row:nth-child(2) {
+  background: rgba(192, 192, 192, 0.05);
+}
+
+.leaderboard-row:nth-child(3) {
+  background: rgba(205, 127, 50, 0.05);
+}
