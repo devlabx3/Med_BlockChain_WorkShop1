@@ -80,6 +80,18 @@ cp skill/editors/antigravity/rainbowkit-evm.md .antigravity/rules/rainbowkit-evm
 
 ---
 
+### Qwen Code
+
+```bash
+cp skill/editors/qwen/rainbowkit-evm.md ./QWEN.md
+```
+
+Qwen Code es un fork de Gemini CLI y usa `QWEN.md` en la raíz del proyecto como contexto persistente (equivalente al `GEMINI.md` de Gemini CLI). El archivo se carga automáticamente en cada sesión.
+
+> Fuente: [https://qwen.ai/qwencode](https://qwen.ai/qwencode)
+
+---
+
 ## Estructura de archivos
 
 ```
@@ -98,7 +110,8 @@ skill/
     ├── claude/CLAUDE.md
     ├── cursor/rainbowkit-evm.mdc
     ├── windsurf/rainbowkit-evm.md
-    └── antigravity/rainbowkit-evm.md
+    ├── antigravity/rainbowkit-evm.md
+    └── qwen/rainbowkit-evm.md
 ```
 
 ## Usar los templates
