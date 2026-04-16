@@ -1,0 +1,249 @@
+/* index.css — Tema oscuro base (OPCIONAL)
+ *
+ * Este CSS es un punto de partida. Puedes reemplazarlo por:
+ * - Tailwind CSS
+ * - shadcn/ui
+ * - CSS Modules
+ * - Cualquier otro sistema
+ *
+ * Tokens de color:
+ *   #0a0a0f  — fondo de página
+ *   #13131a  — fondo de card
+ *   #1a1a26  — fondo interior (inputs, cards anidadas)
+ *   #2a2a3a  — bordes
+ *   #836EF9  — acento principal (botones, focus, símbolos)
+ *   #9d8dfb  — acento hover
+ *   #e0e0f0  — texto primario
+ *   #6b6b8a  — texto secundario / labels
+ *   #ffffff  — valores destacados
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0a0a0f;
+  color: #e0e0f0;
+  min-height: 100vh;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.card {
+  background: #13131a;
+  border: 1px solid #2a2a3a;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 8px 32px rgba(131, 110, 249, 0.08);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #6b6b8a;
+  text-align: center;
+}
+
+.connect-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Balance / Info Card ────────────────────────────────────────────────────── */
+.balance-card {
+  width: 100%;
+  background: #1a1a26;
+  border: 1px solid #2a2a3a;
+  border-radius: 14px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.balance-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b6b8a;
+}
+
+.balance-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.balance-symbol {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #836EF9;
+}
+
+/* ── Formulario de escritura ────────────────────────────────────────────────── */
+.store-form {
+  width: 100%;
+  background: #1a1a26;
+  border: 1px solid #2a2a3a;
+  border-radius: 14px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.store-input-row {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.store-input {
+  flex: 1;
+  background: #0f0f18;
+  border: 1px solid #2a2a3a;
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 0;
+}
+
+.store-input:focus {
+  border-color: #836EF9;
+}
+
+.store-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Ocultar flechas de input number */
+.store-input::-webkit-inner-spin-button,
+.store-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.store-input[type=number] { -moz-appearance: textfield; }
+
+.store-button {
+  background: #836EF9;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.store-button:hover:not(:disabled) {
+  background: #9d8dfb;
+}
+
+.store-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tx-status {
+  font-size: 0.875rem;
+  color: #6b6b8a;
+  text-align: center;
+}
+
+.tx-hash {
+  font-size: 0.7rem;
+  color: #6b6b8a;
+  font-family: monospace;
+}
+
+.error-text {
+  color: #ff6b6b;
+  font-size: 1rem;
+}
+
+/* ── Toast de notificación ──────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.2rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  max-width: 90vw;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: toast-in 0.25s ease;
+  z-index: 9999;
+}
+
+.toast-success {
+  background: #1a2a1a;
+  border: 1px solid #4caf50;
+  color: #81c784;
+}
+
+.toast-error {
+  background: #2a1a1a;
+  border: 1px solid #f44336;
+  color: #e57373;
+}
+
+.toast-icon {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.toast-message {
+  flex: 1;
+  word-break: break-all;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 0 0.2rem;
+}
+
+.toast-close:hover { opacity: 1; }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
