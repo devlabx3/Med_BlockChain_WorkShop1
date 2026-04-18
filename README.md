@@ -26,7 +26,12 @@ Antes de empezar, asegúrate de tener lo siguiente:
 2.  **Red Monad Testnet:** Agregue la red a su wallet si aún no la tiene.
 3.  **Fondos de Prueba (Faucet):** Obtén tokens MON gratuitos para pagar las transacciones en:
     *   👉 [Monad Testnet Faucet](https://faucet.trade/monad-testnet-mon-faucet)
-4.  **Entorno Local:** Tener instalado [Node.js](https://nodejs.org/) (versión 18 o superior).
+4.  **RPC de Monad Testnet (Alchemy):**
+    *   Crea una cuenta en [Alchemy](https://www.alchemy.com/).
+    *   Haz clic en **"Create new app"**.
+    *   En el campo de cadena/red selecciona **Monad Testnet**.
+    *   Una vez creada la app, copia la URL de conexión RPC que te proporciona Alchemy. La necesitarás para configurar tu proyecto.
+5.  **Entorno Local:** Tener instalado [Node.js](https://nodejs.org/) (versión 18 o superior).
 
 ---
 
