@@ -2,28 +2,23 @@
 
 ## Objetivo
 
-Quiero una app web llamada **"TodoList"** donde cada wallet tiene su propia lista de tareas guardada en la blockchain. Quiero CRUD completo:
+Quiero una app web llamada **"TodoList"** donde cada wallet tiene su propia lista de tareas guardada en la blockchain. CRUD completo:
 
-- **Agregar** tareas nuevas
-- **Ver** mis tareas (solo las mías, de mi wallet)
-- **Marcar** tareas como completadas o pendientes
-- **Editar** el texto de una tarea
-- **Eliminar** tareas
-
-Cada operación de escritura es una transacción real en Monad que cuesta gas MON.
-
-> La wallet conectada actúa como el usuario: el contrato separa las tareas automáticamente por dirección de wallet, así que cada persona solo ve las suyas.
+1. **Agregar** tareas nuevas
+2. **Ver** mis tareas (solo las de mi wallet)
+3. **Marcar** tareas como completadas o pendientes
+4. **Editar** el texto de una tarea
+5. **Eliminar** tareas
 
 ---
 
-## Red: Monad Testnet
+## Stack y configuración
 
-| Dato | Valor |
-|------|-------|
-| Nombre | Monad Testnet |
-| Chain ID | `10143` |
-| Token | `MON` |
-| RPC | `https://monad-testnet.g.alchemy.com/v2/<tu_api_key>` |
+Usa **RainbowKit** en la cadena **Monad Testnet**.
+
+La interfaz debe mostrar:
+- **Botón de conexión** (visible siempre, cuando no hay wallet conectada)
+- **Botón de desconexión** (visible cuando hay wallet conectada)
 
 ---
 
@@ -31,16 +26,7 @@ Cada operación de escritura es una transacción real en Monad que cuesta gas MO
 
 **Dirección:** `0x89481D342CBB56635868B90f8E8D413e2c32F66f`
 
-**Qué hace cada función:**
-- `getTodos()` — devuelve todas las tareas de la wallet conectada (gratis, sin gas)
-- `addTodo(texto)` — agrega una tarea nueva
-- `toggleTodo(id)` — alterna entre completada / pendiente
-- `updateTodo(id, nuevoTexto)` — cambia el texto de una tarea
-- `deleteTodo(id)` — elimina una tarea
-
-> Nota: cuando se elimina una tarea, el contrato deja el slot vacío (con texto `""`). La app debe filtrar y no mostrar las tareas con texto vacío.
-
-**ABI:**
+**ABI** (el contrato expone 5 operaciones: agregar, ver, marcar, editar y eliminar tareas. Nota: al eliminar, queda un slot vacío que la app debe filtrar):
 
 ```json
 [
@@ -118,8 +104,6 @@ Cada operación de escritura es una transacción real en Monad que cuesta gas MO
 
 ## Variables de entorno
 
-Crea un archivo `.env` con:
-
 ```
 VITE_WALLETCONNECT_PROJECT_ID=<obtener gratis en cloud.reown.com>
 VITE_CHAIN_RPC_URL=https://monad-testnet.g.alchemy.com/v2/<tu_api_key>
@@ -130,18 +114,12 @@ VITE_TODOLIST_CONTRACT_ADDRESS=0x89481D342CBB56635868B90f8E8D413e2c32F66f
 
 ## Qué debe hacer la app
 
-1. Al abrir → aparece un botón para conectar wallet
-2. Al conectar → muestra la lista de tareas de esa wallet
-3. Formulario para agregar una tarea nueva (con campo de texto y botón "Agregar")
-4. Cada tarea muestra:
-   - Checkbox para marcarla como completada o pendiente
-   - Botón para editar el texto (edición inline)
-   - Botón para eliminar
-5. Durante cualquier transacción → mostrar estado ("Firmando…", "Confirmando…", "¡Listo!")
-6. Al confirmar → la lista se actualiza automáticamente sin recargar la página
+1. **Al abrir la página** — aparece un botón para conectar wallet. Una vez conectado, muestra la lista de tareas de esa wallet.
 
----
+2. **Formulario para agregar** — campo de texto y botón "Agregar" para crear tareas nuevas.
 
-## Instrucción
+3. **Para cada tarea** — checkbox para marcarla como completada o pendiente, botón para editar el texto (inline), y botón para eliminar.
 
-Usa el skill RainbowKit para construir esta app en Monad Testnet.
+4. **Durante transacciones** — mostrar el estado paso a paso: "Firmando…", "Confirmando…", "¡Listo!"
+
+5. **Al confirmar cambios** — la lista se actualiza automáticamente sin recargar la página.
