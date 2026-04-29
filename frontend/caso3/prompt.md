@@ -105,9 +105,9 @@ La interfaz debe mostrar:
 ## Variables de entorno
 
 ```
-VITE_WALLETCONNECT_PROJECT_ID=<obtener gratis en cloud.reown.com>
-VITE_CHAIN_RPC_URL=https://monad-testnet.g.alchemy.com/v2/<tu_api_key>
-VITE_TODOLIST_CONTRACT_ADDRESS=0x89481D342CBB56635868B90f8E8D413e2c32F66f
+PROJECT_ID=<obtener gratis en cloud.reown.com>
+CHAIN_RPC_URL=https://monad-testnet.g.alchemy.com/v2/<tu_api_key>
+CONTRACT_ADDRESS=0x89481D342CBB56635868B90f8E8D413e2c32F66f
 ```
 
 ---
