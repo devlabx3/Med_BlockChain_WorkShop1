@@ -10,14 +10,13 @@ Quiero una app web llamada **"Storage Contract"** que:
 
 ---
 
-## Red: Monad Testnet
+## Stack y configuración
 
-| Dato | Valor |
-|------|-------|
-| Nombre | Monad Testnet |
-| Chain ID | `10143` |
-| Token | `MON` |
-| RPC | `https://monad-testnet.g.alchemy.com/v2/<tu_api_key>` |
+Usa **RainbowKit** en la cadena **Monad Testnet**.
+
+La interfaz debe mostrar:
+- **Botón de conexión** (visible siempre, cuando no hay wallet conectada)
+- **Botón de desconexión** (visible cuando hay wallet conectada)
 
 ---
 
@@ -50,12 +49,10 @@ Quiero una app web llamada **"Storage Contract"** que:
 
 ## Variables de entorno
 
-Crea un archivo `.env` con:
-
 ```
-VITE_WALLETCONNECT_PROJECT_ID=<obtener gratis en cloud.reown.com>
-VITE_CHAIN_RPC_URL=https://monad-testnet.g.alchemy.com/v2/<tu_api_key>
-VITE_STORAGE_CONTRACT_ADDRESS=0xB1BF996AF730333610b26c61C1518e92755bCFfc
+PROJECT_ID=05b0564c6afd9cca5c24433117d22f43
+CHAIN_RPC_URL=https://monad-testnet.g.alchemy.com/v2/uAf5-PCiQhSYESR3WOt81
+CONTRACT_ADDRESS=0xB1BF996AF730333610b26c61C1518e92755bCFfc
 ```
 
 ---
@@ -75,9 +72,3 @@ La app debe funcionar así:
 4. **Al guardar** — la app muestra en pantalla qué está pasando paso a paso: primero pide confirmar en la wallet, luego espera que la red lo procese, y finalmente avisa cuando ya quedó guardado.
 
 5. **Al terminar** — el número que se ve en pantalla se actualiza solo con el nuevo valor, sin necesidad de recargar la página.
-
----
-
-## Instrucción
-
-Usa el skill RainbowKit para construir esta app en Monad Testnet.

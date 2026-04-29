@@ -1,6 +1,6 @@
 # Caso 1: Mi primera Wallet Web3 en Monad
 
-Usa el skill RainbowKit para crear una app web llamada **"Monad Wallet"** en **Monad Testnet** que tenga un botón para conectar wallet y muestre el balance en **MON** cuando esté conectada.
+Usa  RainbowKit con  **Monad Testnet** para crear una app web llamada **"Monad Wallet"**  que tenga un botón para conectar wallet y muestre el balance en **MON** cuando esté conectada.
 
 ## Variables de entorno
 
