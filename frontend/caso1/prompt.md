@@ -4,5 +4,5 @@ Usa  RainbowKit con  **Monad Testnet** para crear una app web llamada **"Monad W
 
 ## Variables de entorno
 
-- `VITE_WALLETCONNECT_PROJECT_ID=<obtener en cloud.reown.com>`
-- `VITE_CHAIN_RPC_URL=https://monad-testnet.g.alchemy.com/v2/<tu_api_key>`
+- `PROJECT_ID=<obtener en cloud.reown.com>`
+- `RPC_URL=https://monad-testnet.g.alchemy.com/v2/<tu_api_key>`
