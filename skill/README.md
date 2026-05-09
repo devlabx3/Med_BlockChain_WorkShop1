@@ -104,6 +104,16 @@ OpenCode usa `AGENTS.md` en la raíz del proyecto para contexto persistente. El 
 
 ---
 
+### Gemini CLI / VS Code Gemini
+
+```bash
+cp skill/editors/gemini/rainbowkit-evm.md ./GEMINI.md
+```
+
+Tanto Gemini CLI como el plugin de VS Code Gemini leen automáticamente cualquier instrucción colocada en un archivo `GEMINI.md` en la raíz de tu proyecto. El archivo se carga automáticamente en cada sesión.
+
+---
+
 ## Estructura de archivos
 
 ```
@@ -124,7 +134,8 @@ skill/
     ├── windsurf/rainbowkit-evm.md
     ├── antigravity/rainbowkit-evm.md
     ├── qwen/rainbowkit-evm.md
-    └── opencode/rainbowkit-evm.md
+    ├── opencode/rainbowkit-evm.md
+    └── gemini/rainbowkit-evm.md
 ```
 
 ## Usar los templates
