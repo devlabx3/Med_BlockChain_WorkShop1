@@ -105,8 +105,8 @@ La interfaz debe mostrar:
 ## Variables de entorno
 
 ```
-PROJECT_ID=<obtener gratis en cloud.reown.com>
-CHAIN_RPC_URL=https://monad-testnet.g.alchemy.com/v2/<tu_api_key>
+PROJECT_ID=05b0564c6afd9cca5c24433117d22f43
+CHAIN_RPC_URL=https://monad-testnet.g.alchemy.com/v2/uAf5-PCiQhSYESR3WOt81
 CONTRACT_ADDRESS=0x89481D342CBB56635868B90f8E8D413e2c32F66f
 ```
 
