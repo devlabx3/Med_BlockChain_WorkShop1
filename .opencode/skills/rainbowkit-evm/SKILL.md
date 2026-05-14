@@ -1,3 +1,13 @@
+---
+name: rainbowkit-evm
+description: Use when user asks to "use RainbowKit with [chain]" or build an EVM dApp with wagmi + viem + RainbowKit. End-to-end patterns for wallet connection, contract reads, contract writes with TX lifecycle, and provider stack setup.
+user-invocable: true
+license: MIT
+compatibility: Requires Node.js 18+, Vite, wagmi v2, viem v2, @rainbow-me/rainbowkit v2
+metadata:
+  version: 1.0.0
+---
+
 # RainbowKit EVM dApp — Reglas para OpenCode
 
 Aplica cuando el usuario diga **"usa RainbowKit con [chain]"** o construya una dApp EVM con wagmi + viem + RainbowKit.
